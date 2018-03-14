@@ -1,0 +1,30 @@
+# https://kubernetes.io/docs/tasks/configure-pod-container/configure-pod-initialization/#creating-a-pod-that-has-an-init-container
+apiVersion: v1
+kind: Pod
+metadata:
+  name: init-containers-demo
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    ports:
+    - containerPort: 80
+    volumeMounts:
+    - name: htmldir
+      mountPath: /usr/share/nginx/html
+  # The following container is run during pod initialization
+  initContainers:
+  - name: setup-html-content
+    image: busybox
+    command:
+    - wget
+    - "-O"
+    - "/work-dir/index.html"
+    - http://kubernetes.io
+    volumeMounts:
+    - name: htmldir
+      mountPath: "/work-dir"
+  dnsPolicy: Default
+  volumes:
+  - name: htmldir
+    emptyDir: {}
