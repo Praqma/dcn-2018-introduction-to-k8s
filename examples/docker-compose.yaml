@@ -1,0 +1,14 @@
+version: '3'
+services:
+  nginx:
+    image: "nginx"
+    ports:
+     - "80:80"
+  deploy:
+    mode: replicated
+    replicas: 2
+  apache:
+    image: "httpd"
+    ports:
+     - "81:80"
+

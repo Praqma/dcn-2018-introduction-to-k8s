@@ -20,7 +20,7 @@ spec:
     - wget
     - "-O"
     - "/work-dir/index.html"
-    - http://kubernetes.io
+    - https://cr.yp.to/
     volumeMounts:
     - name: htmldir
       mountPath: "/work-dir"
